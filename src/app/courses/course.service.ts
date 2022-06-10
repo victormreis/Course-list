@@ -11,9 +11,21 @@ export class courseService {
         return COURSES;
     }
 
+    retriveById(id: number): Course {
+        return COURSES[id-1];
+    }
+
+    saveCourse(course: Course): void {
+        if(course.id) {
+            const index = COURSES.findIndex((courseIterator: Course) => courseIterator.id === course.id)
+            COURSES[index] = course;
+
+        }
+    }
+
 }
 
-var COURSES: Course[] = [
+let COURSES: Course[] = [
   {
       id: 1,
       name: 'Angular: CLI',
