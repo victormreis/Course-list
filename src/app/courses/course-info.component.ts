@@ -19,13 +19,22 @@ export class CourseInfoComponent implements OnInit {
     ngOnInit(){
         window.scroll(0,0)
 
-        this.course = this.courseService.retriveById(this.activatedRoute.snapshot.params['id']);
+        this.courseService.retriveById(this.activatedRoute.snapshot.params['id']).subscribe({
+            next: course => {
+                this.course = course
+
+            },
+            error: err => console.log('Error',err)
+        });
 
     }
 
     save(): void {
-        this.courseService.saveCourse(this.course)
-        
+        this.courseService.saveCourse(this.course).subscribe({
+            next: course => console.log('Saved with success',course),
+            error: err => console.log('Error ',err)
+        })
+
     }
 
 }
